@@ -38,16 +38,14 @@ export const TaskFormDialog = ({
   isEdit = false,
 }: TaskFormDialogProps) => {
   const [title, setTitle] = useState(initialData?.title || "");
-  const [description, setDescription] = useState(
-    initialData?.description || "",
-  );
+
   const [status, setStatus] = useState<TaskStatus>(
     initialData?.status || "created",
   );
 
   const handleSubmit = () => {
     if (!title.trim()) return;
-    onSubmit({ title, description: description || undefined, status });
+    onSubmit({ title, description: "", status });
   };
 
   return (
@@ -65,15 +63,7 @@ export const TaskFormDialog = ({
             required
             disabled={isLoading}
           />
-          <TextField
-            label="Описание"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            fullWidth
-            multiline
-            rows={3}
-            disabled={isLoading}
-          />
+
           <FormControl fullWidth>
             <InputLabel>Статус</InputLabel>
             <Select
